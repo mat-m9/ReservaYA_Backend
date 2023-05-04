@@ -15,5 +15,11 @@
             public const string ReservarImplemento = "reservarImplemento";
             public const string ReservarInstalacion = "reservarInstalacion";
         }
+        public static class User
+        {
+            public const string Register = "register";
+            public const string Login = "login";
+            public const string Change = "change";
+        }
     }
 }

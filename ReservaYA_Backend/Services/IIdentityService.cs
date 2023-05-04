@@ -4,9 +4,8 @@ namespace ReservaYA_Backend.Services
 {
     public interface IIdentityService
     {
-        Task<string> RegisterAsync(string userId);
+        Task<AuthenticationResult> RegisterAsync(string mail, string password);
         Task<AuthenticationResult> LoginAsync(string userName, string password);
-        Task<AuthenticationResult> RefreshTokenAsync(string token, string refresToken);
-        Task<bool> ChangePassword(string userName, string oldPassword, string newPassword);
+        Task<bool> ChangePassword(string mail, string oldPassword, string newPassword);
     }
 }
