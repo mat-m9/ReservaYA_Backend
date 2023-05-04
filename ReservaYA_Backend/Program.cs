@@ -149,7 +149,19 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+builder.Services.AddCors(options =>
+{
+    options.AddDefaultPolicy(builder =>
+    {
+        builder.AllowAnyOrigin();
+        builder.AllowAnyHeader();
+        builder.AllowAnyMethod();
+    });
+});
+
 PopulateDB.Initialize(app.Services);
+
+app.UseCors();
 
 app.UseAuthentication();
 app.UseAuthorization();
