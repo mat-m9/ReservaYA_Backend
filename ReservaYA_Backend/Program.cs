@@ -117,7 +117,7 @@ var security = new Dictionary<string, IEnumerable<string>>
 
 builder.Services.AddSwaggerGen(option =>
 {
-    option.SwaggerDoc("v1", new OpenApiInfo { Title = "Matriz Planificacion", Version = "v1" });
+    option.SwaggerDoc("v1", new OpenApiInfo { Title = "ReservaYa!!!", Version = "v1" });
     option.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
     {
         In = ParameterLocation.Header,

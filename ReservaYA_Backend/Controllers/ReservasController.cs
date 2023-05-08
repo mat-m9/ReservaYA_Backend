@@ -44,24 +44,24 @@ namespace ReservaYA_Backend.Controllers
         }
 
         [HttpPost(template: ApiRoutes.Reserva.ReservarInstalacion)]
-        public async Task<ActionResult<string>> ReservarInstalacion(string IdHorario, string IdUsuario, string Tipo)
+        public async Task<ActionResult<string>> ReservarInstalacion(ReservaRequest request)
         {
             try
             {
-                if (Tipo == "Coliseo" || Tipo == "Cancha")
+                if (request.Tipo == "Coliseo" || request.Tipo == "Cancha")
                 {
-                    HorarioModel horarioT = await context.Horarios.Where(i => i.ID == IdHorario).FirstOrDefaultAsync();
-                    if (Tipo == "Coliseo") { }
+                    HorarioModel horarioT = await context.Horarios.Where(i => i.Dia == request.Dia).Where(i=>i.Desc == request.Hora).FirstOrDefaultAsync();
+                    if (request.Tipo == "Coliseo") { }
                     horarioT.Coliseo = false;
-                    if (Tipo == "Cancha") { }
+                    if (request.Tipo == "Cancha") { }
                     horarioT.Coliseo = false;
 
                     ReservaInsModel reserva = new ReservaInsModel();
                     reserva.Dia = horarioT.Dia;
                     reserva.Hora = horarioT.Desc;
-                    reserva.Tipo = Tipo;
-                    reserva.Hor_ID = IdHorario;
-                    reserva.User_ID = IdUsuario;
+                    reserva.Tipo = request.Tipo;
+                    reserva.Hor_ID = horarioT.ID;
+                    reserva.User_ID = request.UsuarioID;
 
                     var created = context.ReservaInstalaciones.Add(reserva);
                     await context.SaveChangesAsync();
@@ -77,18 +77,18 @@ namespace ReservaYA_Backend.Controllers
         }
 
         [HttpPost(template: ApiRoutes.Reserva.ReservarImplemento)]
-        public async Task<ActionResult<string>> ReservarImplento(string IdImplemento, string IdUsuario, string Dia)
+        public async Task<ActionResult<string>> ReservarImplento(ReservaRequest request)
         {
             try
             {
-                ImplementoModel implementoT = await context.Implementos.Where(i => i.ID == IdImplemento).FirstOrDefaultAsync();
+                ImplementoModel implementoT = await context.Implementos.Where(i => i.Desc == request.Tipo).FirstOrDefaultAsync();
 
                 ReservaImpModel reserva = new ReservaImpModel();
 
-                reserva.Dia = Dia;
+                reserva.Dia = request.Dia;
                 reserva.Tipo = implementoT.Desc;
-                reserva.Imp_ID = IdImplemento;
-                reserva.User_ID = IdUsuario;
+                reserva.Imp_ID = implementoT.ID; ;
+                reserva.User_ID = request.UsuarioID;
 
                 var created = context.ReservaImplementos.Add(reserva);
                 await context.SaveChangesAsync();
