@@ -361,3 +361,5 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+/ReservaYA_Backend/Migrations/20230406181640_InitialCreate.cs
+/ReservaYA_Backend/Migrations/DatabaseContextModelSnapshot.cs
