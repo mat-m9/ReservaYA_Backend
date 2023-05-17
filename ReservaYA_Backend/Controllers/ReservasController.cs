@@ -51,24 +51,29 @@ namespace ReservaYA_Backend.Controllers
                 if (request.Tipo == "Coliseo" || request.Tipo == "Cancha")
                 {
                     HorarioModel horarioT = await context.Horarios.Where(i => i.Dia == request.Dia).Where(i=>i.Desc == request.Hora).FirstOrDefaultAsync();
-                    if (request.Tipo == "Coliseo") { }
-                    horarioT.Coliseo = false;
-                    if (request.Tipo == "Cancha") { }
-                    horarioT.Coliseo = false;
+                    if(horarioT != null)
+                    {
+                        if (request.Tipo == "Coliseo")
+                            horarioT.Coliseo = false;
+                        if (request.Tipo == "Cancha")
+                            horarioT.Cancha = false;
 
-                    ReservaInsModel reserva = new ReservaInsModel();
-                    reserva.Dia = horarioT.Dia;
-                    reserva.Hora = horarioT.Desc;
-                    reserva.Tipo = request.Tipo;
-                    reserva.Hor_ID = horarioT.ID;
-                    reserva.User_ID = request.UsuarioID;
+                        context.Horarios.Update(horarioT);
+                        ReservaInsModel reserva = new ReservaInsModel();
+                        reserva.Dia = horarioT.Dia;
+                        reserva.Hora = horarioT.Desc;
+                        reserva.Tipo = request.Tipo;
+                        reserva.Hor_ID = horarioT.ID;
+                        reserva.User_ID = request.UsuarioID;
 
-                    var created = context.ReservaInstalaciones.Add(reserva);
-                    await context.SaveChangesAsync();
-                    return Ok();
+                        var created = context.ReservaInstalaciones.Add(reserva);
+                        await context.SaveChangesAsync();
+                        return Ok();
+                    }
+                    return BadRequest("No se encontro el horario"); 
                 }
 
-                return BadRequest();
+                return BadRequest("No es Cancha o Coliseo");
             }
             catch (Exception ex)
             {
