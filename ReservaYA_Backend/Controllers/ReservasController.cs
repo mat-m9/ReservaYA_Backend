@@ -44,7 +44,7 @@ namespace ReservaYA_Backend.Controllers
         }
 
         [HttpPost(template: ApiRoutes.Reserva.ReservarInstalacion)]
-        public async Task<ActionResult<string>> ReservarInstalacion(ReservaRequest request)
+        public async Task<IActionResult> ReservarInstalacion(ReservaRequest request)
         {
             try
             {
@@ -82,18 +82,23 @@ namespace ReservaYA_Backend.Controllers
         }
 
         [HttpPost(template: ApiRoutes.Reserva.ReservarImplemento)]
-        public async Task<ActionResult<string>> ReservarImplento(ReservaRequest request)
+        public async Task<IActionResult> ReservarImplento(ReservaRequest request)
         {
             try
             {
                 ImplementoModel implementoT = await context.Implementos.Where(i => i.Desc == request.Tipo).FirstOrDefaultAsync();
-
+                if(implementoT == null)
+                    return BadRequest("Implemento no encontrado: id");    
                 ReservaImpModel reserva = new ReservaImpModel();
 
                 reserva.Dia = request.Dia;
                 reserva.Tipo = implementoT.Desc;
                 reserva.Imp_ID = implementoT.ID; ;
                 reserva.User_ID = request.UsuarioID;
+
+                implementoT.Cant = implementoT.Cant - 1;
+                context.Implementos.Update(implementoT);
+
 
                 var created = context.ReservaImplementos.Add(reserva);
                 await context.SaveChangesAsync();
