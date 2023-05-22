@@ -363,3 +363,6 @@ MigrationBackup/
 FodyWeavers.xsd
 /ReservaYA_Backend/Migrations/20230406181640_InitialCreate.cs
 /ReservaYA_Backend/Migrations/DatabaseContextModelSnapshot.cs
+/ReservaYA_Backend/Migrations/20230520185153_InitialCreate.cs
+/ReservaYA_Backend/Migrations/20230520185153_InitialCreate.Designer.cs
+/ReservaYA_Backend/Migrations/20230406181640_InitialCreate.Designer.cs
