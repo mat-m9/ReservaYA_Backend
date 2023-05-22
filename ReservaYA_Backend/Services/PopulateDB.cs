@@ -84,7 +84,7 @@ namespace ReservaYA_Backend.Services
                     {"Viernes", "14"},
                     {"Viernes", "15"},
                     {"Viernes", "16"},
-                    {"Viernes", "170"},
+                    {"Viernes", "17"},
                     {"Viernes", "18"},
                     {"Viernes", "19"},
                     {"Viernes", "20"}

@@ -11,14 +11,31 @@ using System.Text;
 using System.Text.Json.Serialization;
 using ReservaYA_Backend.ResponseModels;
 
+
 var builder = WebApplication.CreateBuilder(args);
 
 var jwtSettings = new JwtSettings();
 builder.Configuration.Bind(key: nameof(jwtSettings), jwtSettings);
 builder.Services.AddSingleton(jwtSettings);
+
+
+var emailSettings = new EmailSettings();
+builder.Configuration.GetSection("EmailSettings").Bind(emailSettings);
+builder.Services.Configure<EmailSettings>(builder.Configuration.GetSection("EmailSettings"));
+
+//var emailSettings = new EmailSettings();
+//builder.Configuration.Bind("EmailSettings",  emailSettings);
+//builder.Services.AddSingleton(emailSettings);
+
+
 builder.Services.AddScoped<IIdentityService, IdentityService>();
 builder.Services.AddTransient<PasswordGeneratorService>();
 builder.Services.AddSingleton<DefaultRolesService>();
+builder.Services.AddSingleton<EmailService>();
+
+//builder.Services.AddSingleton<ITempDataProvider, CookieTempDataProvider>();
+//builder.Services.AddSingleton<ITempDataDictionaryFactory, TempDataDictionaryFactory>();
+
 
 // Add services to the container.
 

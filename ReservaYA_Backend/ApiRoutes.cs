@@ -20,6 +20,7 @@
             public const string Register = "register";
             public const string Login = "login";
             public const string Change = "change";
+            public const string Recover = "recover";
         }
     }
 }

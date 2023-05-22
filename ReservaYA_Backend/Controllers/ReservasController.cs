@@ -110,5 +110,26 @@ namespace ReservaYA_Backend.Controllers
             }
         }
 
+        [HttpDelete("id")]
+        public async Task<ActionResult> Delete(string id)
+        {
+            var reservaIns = await context.ReservaInstalaciones.Where(r => r.ID == id).FirstOrDefaultAsync();
+            if (reservaIns != null)
+            {
+                context.ReservaInstalaciones.Remove(reservaIns);
+                await context.SaveChangesAsync();
+                return NoContent();
+            }
+
+            var reservaImp = await context.ReservaImplementos.Where(r => r.ID == id).FirstOrDefaultAsync();
+            if (reservaImp != null)
+            {
+                context.ReservaImplementos.Remove(reservaImp);
+                await context.SaveChangesAsync();
+                return NoContent();
+            }
+            return NotFound();           
+        }
+
     }
 }
