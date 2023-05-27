@@ -12,5 +12,7 @@ namespace ReservaYA_Backend.Models
         public string Dia { get; set; }
         public bool? Cancha { get; set; } = true;
         public bool? Coliseo { get; set; } = true;
+
+        public ICollection<ReservaInsModel> Instalaciones { get; set; }
     }
 }

@@ -88,7 +88,7 @@ namespace ReservaYA_Backend.Controllers
             {
                 ImplementoModel implementoT = await context.Implementos.Where(i => i.Desc == request.Tipo).FirstOrDefaultAsync();
                 if(implementoT == null)
-                    return BadRequest("Implemento no encontrado: id");    
+                    return BadRequest("Implemento no encontrado");    
                 ReservaImpModel reserva = new ReservaImpModel();
 
                 reserva.Dia = request.Dia;
@@ -116,6 +116,12 @@ namespace ReservaYA_Backend.Controllers
             var reservaIns = await context.ReservaInstalaciones.Where(r => r.ID == id).FirstOrDefaultAsync();
             if (reservaIns != null)
             {
+                var horario = await context.Horarios.Where(h => h.ID == reservaIns.Hor_ID).FirstOrDefaultAsync();
+                if (reservaIns.Tipo == "Cancha")
+                    horario.Cancha = true;
+                else
+                    horario.Coliseo = true;
+                context.Horarios.Update(horario);
                 context.ReservaInstalaciones.Remove(reservaIns);
                 await context.SaveChangesAsync();
                 return NoContent();
@@ -124,6 +130,9 @@ namespace ReservaYA_Backend.Controllers
             var reservaImp = await context.ReservaImplementos.Where(r => r.ID == id).FirstOrDefaultAsync();
             if (reservaImp != null)
             {
+                var implementp = await context.Implementos.Where(i => i.ID == reservaImp.Imp_ID).FirstOrDefaultAsync();
+                implementp.Cant = implementp.Cant ++;
+                context.Implementos.Update(implementp);
                 context.ReservaImplementos.Remove(reservaImp);
                 await context.SaveChangesAsync();
                 return NoContent();

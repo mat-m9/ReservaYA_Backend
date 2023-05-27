@@ -10,5 +10,8 @@ namespace ReservaYA_Backend.Models
         public string Desc { get; set; }
         [Required]
         public int Cant { get; set; }
+
+
+        public ICollection<ReservaImpModel> Implementos { get; set; }
     }
 }

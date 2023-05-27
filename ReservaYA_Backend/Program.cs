@@ -32,6 +32,7 @@ builder.Services.AddScoped<IIdentityService, IdentityService>();
 builder.Services.AddTransient<PasswordGeneratorService>();
 builder.Services.AddSingleton<DefaultRolesService>();
 builder.Services.AddSingleton<EmailService>();
+builder.Services.AddHostedService<RestablecerReservas>();
 
 //builder.Services.AddSingleton<ITempDataProvider, CookieTempDataProvider>();
 //builder.Services.AddSingleton<ITempDataDictionaryFactory, TempDataDictionaryFactory>();
