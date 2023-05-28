@@ -367,3 +367,5 @@ FodyWeavers.xsd
 /ReservaYA_Backend/Migrations/20230520185153_InitialCreate.Designer.cs
 /ReservaYA_Backend/Migrations/20230406181640_InitialCreate.Designer.cs
 /ReservaYA_Backend/Migrations/20230527230428_Initialcreate.cs
+/ReservaYA_Backend/Migrations/20230528005730_InitialCreate.cs
+/ReservaYA_Backend/Migrations/20230528005730_InitialCreate.Designer.cs
