@@ -82,11 +82,11 @@ namespace ReservaYA_Backend.Controllers
         }
 
         [HttpPost(template: ApiRoutes.Reserva.ReservarImplemento)]
-        public async Task<IActionResult> ReservarImplento(ReservaRequest request)
+        public async Task<IActionResult> ReservarImplento(ReservaImpRequest request)
         {
             try
             {
-                ImplementoModel implementoT = await context.Implementos.Where(i => i.Desc == request.Tipo).FirstOrDefaultAsync();
+                ImplementoModel implementoT = await context.Implementos.Where(i => i.ID == request.ImplementoID).FirstOrDefaultAsync();
                 if(implementoT == null)
                     return BadRequest("Implemento no encontrado");    
                 ReservaImpModel reserva = new ReservaImpModel();
