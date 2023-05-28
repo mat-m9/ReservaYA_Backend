@@ -23,9 +23,9 @@ namespace ReservaYA_Backend
         protected override void OnModelCreating(ModelBuilder builder)
         {
             builder.HasPostgresExtension("uuid-ossp");
-            //builder.Entity<ReservaImpModel>()
-            //     .HasIndex(x => x.Imp_ID)
-            //     .IsUnique();
+            builder.Entity<ReservaImpModel>()
+                 .HasIndex(x => x.Imp_ID)
+                 .IsUnique();
 
             //builder.Entity<ReservaInsModel>()
             //     .HasIndex(x => x.Hor_ID)
