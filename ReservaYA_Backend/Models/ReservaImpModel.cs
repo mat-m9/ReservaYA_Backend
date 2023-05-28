@@ -14,7 +14,7 @@ namespace ReservaYA_Backend.Models
 
         public string Imp_ID { get; set; }
         [ForeignKey(nameof(Imp_ID))]
-        public HorarioModel implemento { get; set; }
+        public ImplementoModel implemento { get; set; }
 
 
         public string User_ID { get; set; }
