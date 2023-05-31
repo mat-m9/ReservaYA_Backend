@@ -30,7 +30,8 @@ namespace ReservaYA_Backend.Services
             var usuarios = await context.Users.ToListAsync();
             foreach(var usuario in usuarios)
             {
-                usuario.NumReservas = 0;
+                usuario.NumImplementos = 0;
+                usuario.NumInstalaciones = 0;
                 context.Update(usuario);
             }
 

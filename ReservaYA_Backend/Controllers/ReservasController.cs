@@ -54,9 +54,18 @@ namespace ReservaYA_Backend.Controllers
                     if(horarioT != null)
                     {
                         if (request.Tipo == "Coliseo")
+                        {
+                            if (horarioT.Coliseo == false)
+                                return BadRequest("Este horario ya ha sido reservado");
                             horarioT.Coliseo = false;
+                        }
+                            
                         if (request.Tipo == "Cancha")
+                        {
+                            if (horarioT.Cancha == false)
+                                return BadRequest("Este horario ya ha sido reservado");
                             horarioT.Cancha = false;
+                        }
 
                         context.Horarios.Update(horarioT);
                         ReservaInsModel reserva = new ReservaInsModel();
@@ -67,7 +76,7 @@ namespace ReservaYA_Backend.Controllers
                         reserva.User_ID = request.UsuarioID;
 
                         var usuario = context.Users.Where(u => u.Id == request.UsuarioID).FirstOrDefault();
-                        usuario.NumReservas = usuario.NumReservas++;
+                        usuario.NumInstalaciones = usuario.NumInstalaciones ++;
 
                         context.Users.Update(usuario);
                         var created = context.ReservaInstalaciones.Add(reserva);
@@ -101,7 +110,7 @@ namespace ReservaYA_Backend.Controllers
                 reserva.User_ID = request.UsuarioID;
 
                 var usuario = context.Users.Where(u => u.Id == request.UsuarioID).FirstOrDefault();
-                usuario.NumReservas = usuario.NumReservas++;
+                usuario.NumImplementos = usuario.NumImplementos ++;
 
                 context.Users.Update(usuario);
 
