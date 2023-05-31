@@ -27,7 +27,14 @@ namespace ReservaYA_Backend.Services
                 await reservasController.Delete(reservation.ID);
             }
 
-       
+            var usuarios = await context.Users.ToListAsync();
+            foreach(var usuario in usuarios)
+            {
+                usuario.NumReservas = 0;
+                context.Update(usuario);
+            }
+
+            await context.SaveChangesAsync();
+        }
     }
-}
 }

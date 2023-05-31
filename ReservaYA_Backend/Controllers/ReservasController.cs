@@ -66,6 +66,10 @@ namespace ReservaYA_Backend.Controllers
                         reserva.Hor_ID = horarioT.ID;
                         reserva.User_ID = request.UsuarioID;
 
+                        var usuario = context.Users.Where(u => u.Id == request.UsuarioID).FirstOrDefault();
+                        usuario.NumReservas = usuario.NumReservas++;
+
+                        context.Users.Update(usuario);
                         var created = context.ReservaInstalaciones.Add(reserva);
                         await context.SaveChangesAsync();
                         return Ok();
@@ -95,6 +99,11 @@ namespace ReservaYA_Backend.Controllers
                 reserva.Tipo = implementoT.Desc;
                 reserva.Imp_ID = implementoT.ID; ;
                 reserva.User_ID = request.UsuarioID;
+
+                var usuario = context.Users.Where(u => u.Id == request.UsuarioID).FirstOrDefault();
+                usuario.NumReservas = usuario.NumReservas++;
+
+                context.Users.Update(usuario);
 
                 implementoT.Cant = implementoT.Cant - 1;
                 context.Implementos.Update(implementoT);

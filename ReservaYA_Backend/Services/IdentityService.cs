@@ -88,7 +88,8 @@ namespace ReservaYA_Backend.Services
                 {
                     new Claim(type: JwtRegisteredClaimNames.Sub, value: newUser.UserName),
                     new Claim(type: JwtRegisteredClaimNames.Jti, value: Guid.NewGuid().ToString()),
-                    new Claim(type: "id", value: newUser.Id)
+                    new Claim(type: "id", value: newUser.Id),
+                    new Claim(type: "numReservas", value: newUser.NumReservas.ToString())
 
                 }),
                 Expires = DateTime.UtcNow.AddMinutes(_jwtSettings.TokenLifeTime),
